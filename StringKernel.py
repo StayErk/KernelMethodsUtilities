@@ -17,7 +17,7 @@ import os
 
 class SimilarityStudies():
 
-    def calculate_similarity_matrix_mismatch_kernel(self, sequenze, l = 9, k = 2, m = 1) -> np.ndarray:
+    def calculate_similarity_matrix_mismatch_kernel(self, sequenze, l = 4, k = 2, m = 1) -> np.ndarray:
         """
         Per ora implementa il mismatch kernel
         :param sequenze:
@@ -42,9 +42,13 @@ class SimilarityStudies():
 
     def calculate_mismatch_kernel(self, path_class_a: str, path_class_b: str, casual_extraction: bool = False, number_of_extraction: int = 500, l=4, k=9, m=1):
         (a_x, a_y) = self.prepare_data(path_class_a, casual_extraction, number_of_extraction, False)
+
         (b_x, b_y) = self.prepare_data(path_class_b, casual_extraction, number_of_extraction, True)
+
         class_a_similarity_matrix = self.calculate_similarity_matrix_mismatch_kernel(a_x, l, k, m)
+        print("Classe a kernel matrix calcolata")
         class_b_similarity_matrix = self.calculate_similarity_matrix_mismatch_kernel(b_x, l, k, m)
+        print("Classe b kernel matrix calcolata")
 
         return class_a_similarity_matrix, class_b_similarity_matrix, a_y, b_y
 
@@ -54,9 +58,13 @@ class SimilarityStudies():
 
         X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.3)
         classificatore = SVC()
+        print("Fit modello Iniziata")
         classificatore.fit(X_train, Y_train)
+        print("Fit modello Finita")
 
         Y_true, Y_pred = Y_test, classificatore.predict(X_test)
+        print("predizione finita")
+        
         Y_score = classificatore.decision_function(X_test)
         return Y_true, Y_pred, Y_score, Y_test, classificatore
 
