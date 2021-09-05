@@ -34,9 +34,9 @@ class SimilarityStudies():
             a_x = preprocess(class_a_seqs)
 
         if zeros:
-            a_y = np.zeros(len(a_x))
+            a_y = np.zeros(len(a_x), dtype=int)
         else:
-            a_y = np.ones(len(a_x))
+            a_y = np.ones(len(a_x), dtype=int)
 
         return a_x, a_y
 
