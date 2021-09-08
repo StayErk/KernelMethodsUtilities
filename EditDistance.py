@@ -1,5 +1,3 @@
-
-from Bio.Seq import  Seq
 from Bio import SeqIO as sio
 
 def min_edit_dist_levenshtein(string1, string2):
@@ -17,30 +15,21 @@ def min_edit_dist_levenshtein(string1, string2):
 
     for i in range(1, length_string1):
         for j in range(1, length_string2):
-            #print("Kata pertama huruf ke-" + str(i) + ": " + string1[ i -1])
-            #print("Kata kedua huruf ke-" + str(j) + ": " + string1[ j -1])
 
-            if string1[ i -1] == string2[ j -1]:
-                #print("Dua karakter ini SAMA")
+            if string1[i - 1] == string2[j - 1]:
                 substitution_cost = 0
                 levenshtein_matrix[i][j] = min(
                     levenshtein_matrix[ i -1][j] + deletion_cost,
                     levenshtein_matrix[ i -1][ j -1] + substitution_cost,
                     levenshtein_matrix[i][ j -1] + insertion_cost
                 )
-                #print(levenshtein_matrix)
-
             else:
-                #print("Dua karakter ini BERBEDA")
                 substitution_cost = 1
                 levenshtein_matrix[i][j] = min(
                     levenshtein_matrix[ i -1][j] + deletion_cost,
                     levenshtein_matrix[ i -1][ j -1] + substitution_cost,
                     levenshtein_matrix[i][ j -1] + insertion_cost
                 )
-                #print(levenshtein_matrix)
-
-            #print("\n")
 
     return (levenshtein_matrix[-1][-1])
 
