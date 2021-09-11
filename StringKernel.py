@@ -27,7 +27,7 @@ class SimilarityStudies():
 
     def prepare_data(self, path_sequenze: str, casual_extraction: bool, number_of_extractions: int, zeros: bool = False):
         class_a_seqs = [seq.seq for seq in sio.parse(path_sequenze, 'fasta')]
-        print(class_a_seqs)
+        #print(class_a_seqs)
         if casual_extraction:
             a_x = preprocess(random.choice(class_a_seqs, number_of_extractions))
         else:
